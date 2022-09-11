@@ -195,16 +195,3 @@ function Search() {
 }
 
 export default Search;
-
-
-
-// https://freefit.co.il/CLUBS/?CLUB=23541&SUBCLUBCATEGORY=1326
-// https://freefit.co.il/CLUBS/?CLUB=29259&SUBCLUBCATEGORY=1369
-
-/*
-const [value, setValue] = useState(null);
-value={value}
-onChange={(e, newValue) => {
-setValue(newValue)
-console.log(e.target.firstChild.data);
-}}*/
