@@ -11,6 +11,7 @@ import { CardActionArea, CardActions } from '@mui/material';
 import Link from '@mui/material/Link';
 import citiesData from "../utiles/placesData";
 import activitiesData from "../utiles/activitiesData";
+import PaginationFooter from "./Pagination";
 import axios from "axios";
 
 function Search() {
@@ -18,8 +19,9 @@ function Search() {
     const [value, setValue] = useState([])
     const [freeFitData, setFreeFitData] = useState([]);
     const [arrayToShow, setArrayToShow] = useState([]);
-    //const [searchToArray, setSearchToArray] = useState([]);
-    console.log(freeFitData);
+    const [activityValue, setActivityValue] = useState(-1);
+    const [numOfItems, setNumOfItems] = useState(5);
+
     function setOptionsOnChange(str) {
         setArrayToShow([])
 
@@ -74,6 +76,7 @@ function Search() {
                 for (let s = 0; s < activitiesData.length; s++) {
                     if (activitiesData[s].activity === arr[a] && arrActivity === "") {
                         arrActivity = activitiesData[s].activityValue
+                        setActivityValue(arrActivity)
                     }
                 }
             }
@@ -87,10 +90,14 @@ function Search() {
         setFreeFitData(data)
     }
 
-    const searchResulteToShow = freeFitData.map((value) =>
+    const searchResultesToShow = freeFitData.map((value) =>
         <Grid item key={value.Id} sx={{ margin: "1rem", width: "13rem" }}>
             <Card>
-                <CardActionArea href="https://freefit.co.il">
+                <CardActionArea
+                    href={"https://freefit.co.il/CLUBS/?CLUB=" + value.Id + "&SUBCLUBCATEGORY=" + activityValue}
+                    target="_blank"
+                    rel="noopener"
+                >
                     <CardMedia
                         component="img"
                         height="140"
@@ -99,19 +106,40 @@ function Search() {
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h6" component="div">
-                            Name: <Typography variant="body2">{value.Name}</Typography>
+                            <Typography variant="body2" textAlign="right">{value.Name}</Typography>
                         </Typography>
                     </CardContent>
                 </CardActionArea>
                 <CardActions sx={{ marginLeft: "6rem" }}>
-                    <Typography variant="body1"><Link href={value.SiteUrl}>לאתר הבית</Link></Typography>
+                    <Typography variant="body1">
+                        <Link href={value.SiteUrl}
+                            underline="none"
+                            target="_blank"
+                            rel="noopener"
+                        >לאתר הבית
+                        </Link>
+                    </Typography>
                 </CardActions>
                 <CardActions sx={{ marginLeft: "5rem" }}>
-                    <Typography variant="body1"><Link href="https://freefit.co.il">FreeFit לאתר</Link></Typography>
+                    <Typography variant="body1">
+                        <Link href={"https://freefit.co.il/CLUBS/?CLUB=" + value.Id + "&SUBCLUBCATEGORY=" + activityValue}
+                            underline="none"
+                            target="_blank"
+                            rel="noopener"
+                        >FreeFit לאתר
+                        </Link>
+                    </Typography>
                 </CardActions>
             </Card>
-        </Grid>
+        </Grid >
     )
+
+    const slicedArray = searchResultesToShow.slice(numOfItems - 5, numOfItems)
+
+    function handlePaginationOnChange(e, value) {
+        const ItemsShownPerClick = 5;
+        setNumOfItems(ItemsShownPerClick * value)
+    }
 
     return (
         <div>
@@ -159,10 +187,11 @@ function Search() {
                         חפש
                     </Button>
                     <Autocomplete
+                        forcePopupIcon={false}
                         multiple
+                        clearOnEscape
                         noOptionsText="Type to search..."
                         sx={{ width: "40%" }}
-                        disablePortal
                         closeText={"Close"}
                         clearText={"Bye Bye"}
                         id="combo-box"
@@ -176,7 +205,7 @@ function Search() {
                             </TextField>
                         }
                         value={value}
-                        onChange={(e, value) => {
+                        onChange={(event, value) => {
                             setValue(value)
                         }}
                         onInputChange={(event, newInputValue) => {
@@ -186,10 +215,18 @@ function Search() {
                 </Grid>
             </Grid>
             <Grid container
-                sx={{ display: "flex", justifyContent: "space-around", marginTop: "5rem" }}
+                sx={{
+                    display: "flex",
+                    justifyContent: "space-around",
+                    marginTop: "5rem"
+                }}
             >
-                {searchResulteToShow}
+                {slicedArray}
             </Grid>
+            <PaginationFooter
+                searchResultesToShow={searchResultesToShow}
+                handleChange={handlePaginationOnChange}
+            />
         </div>
     )
 }
