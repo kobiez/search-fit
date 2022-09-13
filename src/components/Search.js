@@ -9,6 +9,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea, CardActions } from '@mui/material';
 import Link from '@mui/material/Link';
+import Box from '@mui/material/Box';
 import citiesData from "../utiles/placesData";
 import activitiesData from "../utiles/activitiesData";
 import PaginationFooter from "./Pagination";
@@ -17,6 +18,7 @@ import axios from "axios";
 function Search() {
 
     const [value, setValue] = useState([])
+    const [errorMessage, setErrorMessage] = useState("")
     const [freeFitData, setFreeFitData] = useState([]);
     const [arrayToShow, setArrayToShow] = useState([]);
     const [activityValue, setActivityValue] = useState(-1);
@@ -52,17 +54,22 @@ function Search() {
     }
 
     async function requestToFitServer(city, activity) {
-        const response = await axios.post('http://localhost:5000', {
-            CompanyID: 0,
-            area: city ? city : -1,
-            freeText: "",
-            subcategoryId: activity ? activity : -1
-        })
-        return response.data;
+        try {
+            const response = await axios.post('http://localhost:5000', {   // process.env.SERVER_HOST
+                CompanyID: 0,
+                area: city ? city : -1,
+                freeText: "",
+                subcategoryId: activity ? activity : -1
+            })
+            return response.data;
+        } catch (error) {
+            setErrorMessage(error.message)
+            console.error("Error: ", error.message)
+        }
     }
-
+    
     async function searchLogic(arr) {
-
+        setErrorMessage("")
         let arrCity = "";
         let arrActivity = "";
 
@@ -81,18 +88,20 @@ function Search() {
                 }
             }
         } else if (arr.length === 0) {
-            return console.error('You must choose atlist 1 paramater')
+            setErrorMessage('You must choose atlist 1 paramater')
+            return console.error('Search error')
         }
         else {
-            return console.error('You can search for max of 2 parameters, 1 city and 1 activity');
+            setErrorMessage('You can search for max of 2 parameters, 1 city and 1 activity')
+            return console.error('Search error');
         }
         const data = await requestToFitServer(arrCity, arrActivity)
         setFreeFitData(data)
     }
 
     const searchResultesToShow = freeFitData.map((value) =>
-        <Grid item key={value.Id} sx={{ margin: "1rem", width: "13rem" }}>
-            <Card>
+        <Grid item key={value.Id} sx={{ margin: "1rem", width: "13rem" }} xs={12} sm={5} md={2} xl={2}>
+            <Card >
                 <CardActionArea
                     href={"https://freefit.co.il/CLUBS/?CLUB=" + value.Id + "&SUBCLUBCATEGORY=" + activityValue}
                     target="_blank"
@@ -100,7 +109,7 @@ function Search() {
                 >
                     <CardMedia
                         component="img"
-                        height="140"
+                        height="180"
                         image={'https://freefit.co.il' + value.LogoPath}
                         alt={value.Name}
                     />
@@ -110,7 +119,7 @@ function Search() {
                         </Typography>
                     </CardContent>
                 </CardActionArea>
-                <CardActions sx={{ marginLeft: "6rem" }}>
+                <CardActions sx={{ marginLeft: "7rem" }}>
                     <Typography variant="body1">
                         <Link href={value.SiteUrl}
                             underline="none"
@@ -120,7 +129,7 @@ function Search() {
                         </Link>
                     </Typography>
                 </CardActions>
-                <CardActions sx={{ marginLeft: "5rem" }}>
+                <CardActions sx={{ marginLeft: "6rem" }}>
                     <Typography variant="body1">
                         <Link href={"https://freefit.co.il/CLUBS/?CLUB=" + value.Id + "&SUBCLUBCATEGORY=" + activityValue}
                             underline="none"
@@ -137,8 +146,7 @@ function Search() {
     const slicedArray = searchResultesToShow.slice(numOfItems - 5, numOfItems)
 
     function handlePaginationOnChange(e, value) {
-        const ItemsShownPerClick = 5;
-        setNumOfItems(ItemsShownPerClick * value)
+        setNumOfItems(5 * value)
     }
 
     return (
@@ -178,7 +186,7 @@ function Search() {
                         variant="contained"
                         onClick={() => searchLogic(value)}
                         sx={{
-                            width: "10%",
+                            width: "7%",
                             height: "55px",
                             fontSize: " 1.3rem",
                             marginRight: "5px"
@@ -191,7 +199,7 @@ function Search() {
                         multiple
                         clearOnEscape
                         noOptionsText="Type to search..."
-                        sx={{ width: "40%" }}
+                        sx={{ width: "35%" }}
                         closeText={"Close"}
                         clearText={"Bye Bye"}
                         id="combo-box"
@@ -201,8 +209,8 @@ function Search() {
                             <TextField {...params}
                                 InputProps={{
                                     ...params.InputProps
-                                }} >
-                            </TextField>
+                                }}
+                            />
                         }
                         value={value}
                         onChange={(event, value) => {
@@ -221,12 +229,15 @@ function Search() {
                     marginTop: "5rem"
                 }}
             >
-                {slicedArray}
+                <Typography variant="h5" color="error" gutterBottom>{errorMessage && errorMessage}</Typography>
+                {!errorMessage && slicedArray}
             </Grid>
-            <PaginationFooter
-                searchResultesToShow={searchResultesToShow}
-                handleChange={handlePaginationOnChange}
-            />
+            <Box sx={{ marginTop: "2rem" }}>
+                {!errorMessage && <PaginationFooter
+                    searchResultesToShow={searchResultesToShow}
+                    handleChange={handlePaginationOnChange}
+                />}
+            </Box>
         </div>
     )
 }
