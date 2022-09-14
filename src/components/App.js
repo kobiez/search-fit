@@ -1,10 +1,9 @@
-import '../App.css';
-import Search from './Search';
+import SearchRules from './SearchRules';
 
 function App() {
   return (
     <div className="App">
-      <Search />      
+      <SearchRules />
     </div>
   );
 }
