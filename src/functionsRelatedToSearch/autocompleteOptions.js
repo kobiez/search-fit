@@ -13,21 +13,21 @@ function setAutocompleteOptionsOnChange(clientInputStr, setArrayToShow) {
     let tempCityArray = [];
     let tempActivityArray = [];
 
-    for (let a = 0; a < arrFromClientInput.length; a++) {
+    for (let inputArrIndex = 0; inputArrIndex < arrFromClientInput.length; inputArrIndex++) {
 
         setArrayToShow([])
 
-        for (let c = 0; c < citiesData.length; c++) {
-            if (citiesData[c].city.includes(arrFromClientInput[a])) {
-                tempCityArray = tempCityArray.filter(value => value !== citiesData[c].city)
-                tempCityArray = [...tempCityArray, citiesData[c].city]
+        for (let cityIndex = 0; cityIndex < citiesData.length; cityIndex++) {
+            if (citiesData[cityIndex].city.includes(arrFromClientInput[inputArrIndex])) {
+                tempCityArray = tempCityArray.filter(value => value !== citiesData[cityIndex].city)
+                tempCityArray = [...tempCityArray, citiesData[cityIndex].city]
             }
         }
 
-        for (let s = 0; s < activitiesData.length; s++) {
-            if (activitiesData[s].activity.includes(arrFromClientInput[a])) {
-                tempActivityArray = tempActivityArray.filter(value => value !== activitiesData[s].activity)
-                tempActivityArray = [...tempActivityArray, activitiesData[s].activity]
+        for (let activityIndex = 0; activityIndex < activitiesData.length; activityIndex++) {
+            if (activitiesData[activityIndex].activity.includes(arrFromClientInput[inputArrIndex])) {
+                tempActivityArray = tempActivityArray.filter(value => value !== activitiesData[activityIndex].activity)
+                tempActivityArray = [...tempActivityArray, activitiesData[activityIndex].activity]
             }
         }
     }

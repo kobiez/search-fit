@@ -1,9 +1,9 @@
-import SearchRules from './SearchRules';
+import MainSearchComponent from './MainSearchComponent';
 
 function App() {
   return (
     <div className="App">
-      <SearchRules />
+      <MainSearchComponent />
     </div>
   );
 }

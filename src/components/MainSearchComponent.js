@@ -7,10 +7,10 @@ import SearchInFit from './SearchInFit';
 import requestToFitServer from '../functionsRelatedToSearch/freeFitService'
 import mapThroughSearchValueArr from '../functionsRelatedToSearch/mapThroughSearchValueArr'
 
-function SearchRules() {
+function MainSearchComponent() {
 
     const [errorMessage, setErrorMessage] = useState("")
-    const [freeFitData, setFreeFitData] = useState([]);
+    const [searchResult, setSearchResult] = useState([]);
     const [activityValue, setActivityValue] = useState(-1);
     const [numOfItems, setNumOfItems] = useState(5);
 
@@ -20,15 +20,18 @@ function SearchRules() {
         let arrActivity = "";
 
         if (arrFromAutocompleteInput.length <= 2 && arrFromAutocompleteInput.length > 0) {
-            for (let a = 0; a < arrFromAutocompleteInput.length; a++) {
-                for (let c = 0; c < citiesData.length; c++) {
-                    if (citiesData[c].city === arrFromAutocompleteInput[a] && arrCity === "") {
-                        arrCity += arrFromAutocompleteInput[a]
+
+            for (let autoInputIndex = 0; autoInputIndex < arrFromAutocompleteInput.length; autoInputIndex++) {
+
+                for (let cityIndex = 0; cityIndex < citiesData.length; cityIndex++) {
+                    if (citiesData[cityIndex].city === arrFromAutocompleteInput[autoInputIndex] && arrCity === "") {
+                        arrCity += arrFromAutocompleteInput[autoInputIndex]
                     }
                 }
-                for (let s = 0; s < activitiesData.length; s++) {
-                    if (activitiesData[s].activity === arrFromAutocompleteInput[a] && arrActivity === "") {
-                        arrActivity = activitiesData[s].activityValue
+                
+                for (let activityIndex = 0; activityIndex < activitiesData.length; activityIndex++) {
+                    if (activitiesData[activityIndex].activity === arrFromAutocompleteInput[autoInputIndex] && arrActivity === "") {
+                        arrActivity = activitiesData[activityIndex].activityValue
                         setActivityValue(arrActivity)
                     }
                 }
@@ -45,16 +48,16 @@ function SearchRules() {
         const data = await requestToFitServer(arrCity, arrActivity)
 
         if (data.length === 0) {
-            setErrorMessage('לא נמצאו תוצאות')
+            setErrorMessage("Can't find any results that matching your search, try another search")
         }
-        setFreeFitData(data)
+        setSearchResult(data)
     }
 
     function handlePaginationOnChange(e, value) {
         setNumOfItems(5 * value)
     }
 
-    const searchResultesArray = mapThroughSearchValueArr(freeFitData, activityValue)
+    const searchResultesArray = mapThroughSearchValueArr(searchResult, activityValue)
 
     const slicedArray = searchResultesArray.slice(numOfItems - 5, numOfItems)
 
@@ -75,4 +78,4 @@ function SearchRules() {
     )
 }
 
-export default SearchRules;
+export default MainSearchComponent;
