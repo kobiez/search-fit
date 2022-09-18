@@ -12,55 +12,62 @@ function SearchSection({ searchLogic }) {
     const [arrayToShow, setArrayToShow] = useState([]);
 
     return (
-        <Grid
-            item
+        <Grid container component={"div"}
+            spacing={1}
             sx={{
-                width: "100%",
                 display: "flex",
                 flexDirection: "row",
-                alignItems: "center",
                 justifyContent: "center"
             }}
         >
-            <Button
-                type="button"
-                variant="contained"
-                onClick={() => searchLogic(inputValue)}
+            <Grid item xs={8} md={8} lg={6}
                 sx={{
-                    width: "7%",
-                    height: "55px",
-                    fontSize: " 1.3rem",
-                    marginRight: "5px"
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "center"
                 }}
             >
-                חפש
-            </Button>
-            <Autocomplete
-                forcePopupIcon={false}
-                multiple
-                clearOnEscape
-                noOptionsText="Type to search..."
-                sx={{ width: "35%" }}
-                closeText={"Close"}
-                clearText={"Bye Bye"}
-                id="combo-box"
-                options={[...arrayToShow]}
-                getOptionLabel={value => `${value}`}
-                renderInput={(params) =>
-                    <TextField {...params}
-                        InputProps={{
-                            ...params.InputProps
-                        }}
-                    />
-                }
-                value={inputValue}
-                onChange={(event, value) => {
-                    setInputValue(value)
-                }}
-                onInputChange={(event, newInputValue) => {
-                    setAutocompleteOptionsOnChange(newInputValue, setArrayToShow)
-                }}
-            />
+                <Button
+                    type="button"
+                    variant="contained"
+                    onClick={() => searchLogic(inputValue)}
+                    sx={{
+                        width: "10%",
+                        height: "55px",
+                        fontSize: " 1.3rem",
+                        marginRight: "5px"
+                    }}
+                >
+                    חפש
+                </Button>
+                <Autocomplete
+                    forcePopupIcon={false}
+                    multiple
+                    clearOnEscape
+                    noOptionsText="Type to search..."
+                    sx={{ width: "45%" }}
+                    closeText={"Close"}
+                    clearText={"Bye Bye"}
+                    id="combo-box"
+                    options={[...arrayToShow]}
+                    getOptionLabel={value => `${value}`}
+                    renderInput={(params) =>
+                        <TextField {...params}
+                            InputProps={{
+                                ...params.InputProps
+                            }}
+                        />
+                    }
+                    value={inputValue}
+                    onChange={(event, value) => {
+                        setInputValue(value)
+                    }}
+                    onInputChange={(event, newInputValue) => {
+                        setAutocompleteOptionsOnChange(newInputValue, setArrayToShow)
+                    }}
+                />
+            </Grid>
         </Grid>
     )
 }

@@ -8,8 +8,17 @@ import Link from '@mui/material/Link';
 
 function mapThroughSearchValueArr(arrFromClientSearch, activityId) {
     const searchResultesToShow = arrFromClientSearch.map((value) =>
-        <Grid item key={value.Id} sx={{ margin: "1rem", width: "13rem" }} xs={12} sm={5} md={2} xl={2}>
-            <Card >
+        <Grid item key={value.Id} xs={4} md={2}>
+            <Card
+                sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "25rem",
+                    position:"relative"
+                }}
+            >
                 <CardActionArea
                     href={"https://freefit.co.il/CLUBS/?CLUB=" + value.Id + "&SUBCLUBCATEGORY=" + activityId}
                     target="_blank"
@@ -17,7 +26,12 @@ function mapThroughSearchValueArr(arrFromClientSearch, activityId) {
                 >
                     <CardMedia
                         component="img"
-                        height="180"
+                        sx={{
+                            display: "block",
+                            marginLeft: "auto",
+                            marginRight: "auto",
+                            width: "50%"
+                        }}
                         image={'https://freefit.co.il' + value.LogoPath}
                         alt={value.Name}
                     />
@@ -27,7 +41,16 @@ function mapThroughSearchValueArr(arrFromClientSearch, activityId) {
                         </Typography>
                     </CardContent>
                 </CardActionArea>
-                <CardActions sx={{ marginLeft: "7rem" }}>
+                <CardActions 
+                    sx={{
+                        display:"flex",
+                        flexDirection:"column",
+                        justifyContent:"center",
+                        alignItems:"flex-end",
+                        position:"absolute",
+                        top:"85%"
+                    }}
+                >
                     <Typography variant="body1">
                         <Link href={value.SiteUrl}
                             underline="none"
@@ -36,8 +59,6 @@ function mapThroughSearchValueArr(arrFromClientSearch, activityId) {
                         >לאתר הבית
                         </Link>
                     </Typography>
-                </CardActions>
-                <CardActions sx={{ marginLeft: "6rem" }}>
                     <Typography variant="body1">
                         <Link href={"https://freefit.co.il/CLUBS/?CLUB=" + value.Id + "&SUBCLUBCATEGORY=" + activityId}
                             underline="none"

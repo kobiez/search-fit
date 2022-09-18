@@ -1,18 +1,14 @@
 import { useState } from "react";
-import Box from '@mui/material/Box';
 import citiesData from "../utiles/placesData";
 import activitiesData from "../utiles/activitiesData";
-import PaginationFooter from "./Pagination";
 import SearchInFit from './SearchInFit';
 import requestToFitServer from '../functionsRelatedToSearch/freeFitService'
-import mapThroughSearchValueArr from '../functionsRelatedToSearch/mapThroughSearchValueArr'
 
 function MainSearchComponent() {
 
     const [errorMessage, setErrorMessage] = useState("")
     const [searchResult, setSearchResult] = useState([]);
     const [activityValue, setActivityValue] = useState(-1);
-    const [numOfItems, setNumOfItems] = useState(5);
 
     async function searchLogic(arrFromAutocompleteInput) {
         setErrorMessage("")
@@ -28,7 +24,7 @@ function MainSearchComponent() {
                         arrCity += arrFromAutocompleteInput[autoInputIndex]
                     }
                 }
-                
+
                 for (let activityIndex = 0; activityIndex < activitiesData.length; activityIndex++) {
                     if (activitiesData[activityIndex].activity === arrFromAutocompleteInput[autoInputIndex] && arrActivity === "") {
                         arrActivity = activitiesData[activityIndex].activityValue
@@ -53,27 +49,14 @@ function MainSearchComponent() {
         setSearchResult(data)
     }
 
-    function handlePaginationOnChange(e, value) {
-        setNumOfItems(5 * value)
-    }
-
-    const searchResultesArray = mapThroughSearchValueArr(searchResult, activityValue)
-
-    const slicedArray = searchResultesArray.slice(numOfItems - 5, numOfItems)
-
     return (
         <div>
             <SearchInFit
-                slicedArray={slicedArray}
                 errorMessage={errorMessage}
                 searchLogic={searchLogic}
+                searchResult={searchResult}
+                activityValue={activityValue}
             />
-            <Box sx={{ marginTop: "2rem" }}>
-                {!errorMessage && <PaginationFooter
-                    searchResultesArray={searchResultesArray}
-                    handleChange={handlePaginationOnChange}
-                />}
-            </Box>
         </div >
     )
 }
