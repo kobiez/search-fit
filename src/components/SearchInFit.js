@@ -4,6 +4,7 @@ import SearchSection from './SearchSection';
 import PaginationFooter from "./Pagination";
 import mapThroughSearchValueArr from './SlicedResults'
 import { useState } from "react";
+import { Link } from "@mui/material";
 
 function SearchInFit({ errorMessage, searchLogic, activityValue, searchResult }) {
 
@@ -17,46 +18,58 @@ function SearchInFit({ errorMessage, searchLogic, activityValue, searchResult })
         <Grid container display="flex" direction="column" spacing={3} justifyContent="space-around">
             <Grid item xs={4}>
                 <Typography
-                    variant="h2"
+                    variant="h1"
                     mb={1}
-                    color="error.dark"
+                    color="error.light"
                     textAlign="center"
+                    sx={{ fontFamily: "'Permanent Marker'", fontSize: "7.5rem", textShadow: "" }}
                 >
                     Search in fit
                 </Typography>
             </Grid>
             <Grid item xs={4}>
                 <Typography
-                    variant="h3"
+                    variant="h5"
                     mb={4}
-                    color="primary"
+                    color="error.light"
                     textAlign="center"
                 >
-                    חיפוש
+                    <Link
+                        href="https://freefit.co.il"
+                        underline="none"
+                        target="_blank"
+                        rel="noopener"
+                        color="error.light"
+                    >Freefit</Link> מנוע חיפוש לאתר
                 </Typography>
             </Grid>
             <SearchSection
                 searchLogic={searchLogic}
+                setNumOfItems={setNumOfItems}
             />
+            <Grid item
+                display={!errorMessage ? "none" : "block"}>
+                {errorMessage && <Typography
+                    variant="h5"
+                    color="error"
+                    gutterBottom
+                    textAlign="center"
+                >
+                    {errorMessage}
+                </Typography>}
+            </Grid>
             <Grid item
                 sx={{
                     display: "flex",
                     flexWrap: "wrap",
                     justifyContent: "space-around",
                     alignItems: "center",
-                    marginTop: "5rem"
+                    marginTop: "3.5rem"
                 }}
             >
-                {errorMessage && <Typography
-                    variant="h5"
-                    color="error"
-                    gutterBottom
-                >
-                    {errorMessage}
-                </Typography>}
-                <Grid container
-                    rowSpacing={2}
-                    columnSpacing={0.5}
+                {!errorMessage && <Grid container maxWidth="lg"
+                    rowSpacing={1}
+                    columnSpacing={1}
                     columns={16}
                     sx={{
                         display: "flex",
@@ -64,15 +77,17 @@ function SearchInFit({ errorMessage, searchLogic, activityValue, searchResult })
                         alignItems: "center",
                         justifyContent: "center",
                         flexWrap: "wrap",
+                        minHeight: "40rem",
+                        marginBottom: "6rem"
                     }}
                 >
-                    {!errorMessage && slicedArray}
-                </Grid>
+                    {slicedArray}
+                </Grid>}
             </Grid>
             <Grid item
                 sx={{
                     display: "flex",
-                    justifyContent: "center"
+                    justifyContent: "center",
                 }}>
                 {!errorMessage && <PaginationFooter
                     searchResultesArray={searchResultesArray}

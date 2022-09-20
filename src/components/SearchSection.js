@@ -5,8 +5,7 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import setAutocompleteOptionsOnChange from './autocompleteOptions'
 
-
-function SearchSection({ searchLogic }) {
+function SearchSection({ searchLogic, setNumOfItems }) {
 
     const [autocompleteInputValue, setAuotocompleteInputValue] = useState([])
     const [arrayForAutocompleteOptions, setArrayForAutocompleteOptions] = useState([]);
@@ -31,7 +30,8 @@ function SearchSection({ searchLogic }) {
                 <Button
                     type="button"
                     variant="contained"
-                    onClick={() => searchLogic(autocompleteInputValue)}
+                    color="error"
+                    onClick={() => searchLogic(autocompleteInputValue, setNumOfItems)}
                     sx={{
                         width: "10%",
                         height: "55px",

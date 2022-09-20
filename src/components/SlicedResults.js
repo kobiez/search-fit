@@ -8,7 +8,7 @@ import Link from '@mui/material/Link';
 
 function mapThroughSearchValueArr(arrFromClientSearch, activityId) {
     const searchResultesToShow = arrFromClientSearch.map((value) =>
-        <Grid item key={value.Id} xs={6} s={4} md={4} lg={2}>
+        <Grid item key={value.Id} xs={6} s={4} md={4} lg={4}>
             <Card
                 sx={{
                     display: "flex",
@@ -74,7 +74,7 @@ function mapThroughSearchValueArr(arrFromClientSearch, activityId) {
                             target="_blank"
                             rel="noopener"
 
-                        >FreeFit לאתר
+                        >Freefit לאתר
                         </Link>
                     </Typography>
                 </CardActions>

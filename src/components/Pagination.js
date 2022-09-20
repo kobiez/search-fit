@@ -2,25 +2,24 @@ import { useEffect, useState } from "react";
 import Box from '@mui/material/Box';
 import Pagination from '@mui/material/Pagination';
 
-function PaginationFooter({ searchResultesArray, setNumOfItems }) {
+function PaginationFooter({ searchResultesArray, setNumOfItems}) {
     const [count, setCount] = useState(0);
 
     useEffect(() => {
         setCount(Math.ceil(searchResultesArray.length / 8))
-    }, [searchResultesArray.length])
+    }, [searchResultesArray.length, setCount])
 
     function handlePaginationOnChange(e, value) {
         setNumOfItems(8 * value)
     }
 
     return (
-        <Box component={"div"} /* sx={{ position:"absolute", bottom:"2%"}} */>
+        <Box component={"div"}>
             {count > 0 && <Pagination
                 showFirstButton
                 showLastButton
-                size="large"
                 variant="outlined"
-                color="primary"
+                color="error"
                 count={count}
                 onChange={handlePaginationOnChange}
             />}

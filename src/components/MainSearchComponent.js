@@ -10,8 +10,9 @@ function MainSearchComponent() {
     const [searchResult, setSearchResult] = useState([]);
     const [activityValue, setActivityValue] = useState(-1);
 
-    async function searchLogic(arrFromAutocompleteInput) {
-        setErrorMessage("")
+    async function searchLogic(arrFromAutocompleteInput, setNumOfItems) {
+        setErrorMessage("");
+        setNumOfItems(8);
         let arrCity = "";
         let arrActivity = "";
 
@@ -36,7 +37,7 @@ function MainSearchComponent() {
             return console.error('Search error')
         }
         else {
-            setErrorMessage('You can search for max of 2 parameters, 1 city and 1 activity')
+            setErrorMessage('You can search maximum 2 parameters, 1 city and 1 activity')
             return console.error('Search error');
         }
 
