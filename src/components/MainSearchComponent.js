@@ -10,9 +10,10 @@ function MainSearchComponent() {
     const [searchResult, setSearchResult] = useState([]);
     const [activityValue, setActivityValue] = useState(-1);
 
-    async function searchLogic(arrFromAutocompleteInput, setNumOfItems) {
+    async function searchLogic(arrFromAutocompleteInput, setNumOfItems, setPage) {
         setErrorMessage("");
         setNumOfItems(8);
+        setPage(1)
         let arrCity = "";
         let arrActivity = "";
 

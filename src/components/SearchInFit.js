@@ -9,6 +9,7 @@ import { Link } from "@mui/material";
 function SearchInFit({ errorMessage, searchLogic, activityValue, searchResult }) {
 
     const [numOfItems, setNumOfItems] = useState(8);
+    const [page, setPage] = useState(1);
 
     const searchResultesArray = mapThroughSearchValueArr(searchResult, activityValue)
 
@@ -46,6 +47,7 @@ function SearchInFit({ errorMessage, searchLogic, activityValue, searchResult })
             <SearchSection
                 searchLogic={searchLogic}
                 setNumOfItems={setNumOfItems}
+                setPage={setPage}
             />
             <Grid item
                 display={!errorMessage ? "none" : "block"}>
@@ -92,6 +94,8 @@ function SearchInFit({ errorMessage, searchLogic, activityValue, searchResult })
                 {!errorMessage && <PaginationFooter
                     searchResultesArray={searchResultesArray}
                     setNumOfItems={setNumOfItems}
+                    page={page}
+                    setPage={setPage}
                 />}
             </Grid>
         </Grid>
