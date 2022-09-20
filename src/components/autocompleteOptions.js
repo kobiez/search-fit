@@ -1,5 +1,5 @@
-import citiesData from "../utiles/placesData";
-import activitiesData from "../utiles/activitiesData";
+import citiesData from "../data/placesData";
+import activitiesData from "../data/activitiesData";
 
 function setAutocompleteOptionsOnChange(clientInputStr, setArrayToShow) {
     setArrayToShow([])

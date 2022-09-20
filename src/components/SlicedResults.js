@@ -8,50 +8,59 @@ import Link from '@mui/material/Link';
 
 function mapThroughSearchValueArr(arrFromClientSearch, activityId) {
     const searchResultesToShow = arrFromClientSearch.map((value) =>
-        <Grid item key={value.Id} xs={4} md={2}>
+        <Grid item key={value.Id} xs={6} s={4} md={4} lg={2}>
             <Card
                 sx={{
                     display: "flex",
                     flexDirection: "column",
-                    justifyContent: "center",
                     alignItems: "center",
-                    height: "25rem",
-                    position:"relative"
+                    position: "relative",
+                    maxWidth: "250px",
+                    height: "300px"
                 }}
             >
                 <CardActionArea
                     href={"https://freefit.co.il/CLUBS/?CLUB=" + value.Id + "&SUBCLUBCATEGORY=" + activityId}
                     target="_blank"
                     rel="noopener"
+                    sx={{ height:"70%" }}
                 >
                     <CardMedia
                         component="img"
                         sx={{
-                            display: "block",
                             marginLeft: "auto",
                             marginRight: "auto",
-                            width: "50%"
+                            width: "100%",
+                            maxHeight: "200px"
                         }}
                         image={'https://freefit.co.il' + value.LogoPath}
                         alt={value.Name}
                     />
-                    <CardContent>
-                        <Typography gutterBottom variant="h6" component="div">
-                            <Typography variant="body2" textAlign="right">{value.Name}</Typography>
-                        </Typography>
-                    </CardContent>
                 </CardActionArea>
-                <CardActions 
+                <CardContent
                     sx={{
-                        display:"flex",
-                        flexDirection:"column",
-                        justifyContent:"center",
-                        alignItems:"flex-end",
-                        position:"absolute",
-                        top:"85%"
+                        padding: "5px",
+                        position: "absolute",
+                        right: "0",
+                        top: "67%"
                     }}
                 >
-                    <Typography variant="body1">
+                    <Typography gutterBottom variant="h6" component="div">
+                        <Typography variant="body2" textAlign="right">{value.Name}</Typography>
+                    </Typography>
+                </CardContent>
+                <CardActions
+                    sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "flex-end",
+                        position: "absolute",
+                        top: "80%",
+                        right: "1%"
+                    }}
+                >
+                    <Typography variant="body1" >
                         <Link href={value.SiteUrl}
                             underline="none"
                             target="_blank"
@@ -64,6 +73,7 @@ function mapThroughSearchValueArr(arrFromClientSearch, activityId) {
                             underline="none"
                             target="_blank"
                             rel="noopener"
+
                         >FreeFit לאתר
                         </Link>
                     </Typography>

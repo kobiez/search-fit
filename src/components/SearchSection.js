@@ -3,13 +3,13 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
-import setAutocompleteOptionsOnChange from '../functionsRelatedToSearch/autocompleteOptions'
+import setAutocompleteOptionsOnChange from './autocompleteOptions'
 
 
 function SearchSection({ searchLogic }) {
 
-    const [inputValue, setInputValue] = useState([])
-    const [arrayToShow, setArrayToShow] = useState([]);
+    const [autocompleteInputValue, setAuotocompleteInputValue] = useState([])
+    const [arrayForAutocompleteOptions, setArrayForAutocompleteOptions] = useState([]);
 
     return (
         <Grid container component={"div"}
@@ -31,7 +31,7 @@ function SearchSection({ searchLogic }) {
                 <Button
                     type="button"
                     variant="contained"
-                    onClick={() => searchLogic(inputValue)}
+                    onClick={() => searchLogic(autocompleteInputValue)}
                     sx={{
                         width: "10%",
                         height: "55px",
@@ -46,11 +46,11 @@ function SearchSection({ searchLogic }) {
                     multiple
                     clearOnEscape
                     noOptionsText="Type to search..."
-                    sx={{ width: "45%" }}
+                    sx={{ width: "45%", minWidth: "250px" }}
                     closeText={"Close"}
                     clearText={"Bye Bye"}
                     id="combo-box"
-                    options={[...arrayToShow]}
+                    options={[...arrayForAutocompleteOptions]}
                     getOptionLabel={value => `${value}`}
                     renderInput={(params) =>
                         <TextField {...params}
@@ -59,12 +59,12 @@ function SearchSection({ searchLogic }) {
                             }}
                         />
                     }
-                    value={inputValue}
+                    value={autocompleteInputValue}
                     onChange={(event, value) => {
-                        setInputValue(value)
+                        setAuotocompleteInputValue(value)
                     }}
                     onInputChange={(event, newInputValue) => {
-                        setAutocompleteOptionsOnChange(newInputValue, setArrayToShow)
+                        setAutocompleteOptionsOnChange(newInputValue, setArrayForAutocompleteOptions)
                     }}
                 />
             </Grid>

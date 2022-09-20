@@ -2,19 +2,19 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import SearchSection from './SearchSection';
 import PaginationFooter from "./Pagination";
-import mapThroughSearchValueArr from '../functionsRelatedToSearch/mapThroughSearchValueArr'
+import mapThroughSearchValueArr from './SlicedResults'
 import { useState } from "react";
 
-function SearchInFit({ errorMessage, searchLogic, activityValue, searchResult}) {
+function SearchInFit({ errorMessage, searchLogic, activityValue, searchResult }) {
 
-    const [numOfItems, setNumOfItems] = useState(5);
+    const [numOfItems, setNumOfItems] = useState(8);
 
     const searchResultesArray = mapThroughSearchValueArr(searchResult, activityValue)
 
-    const slicedArray = searchResultesArray.slice(numOfItems - 5, numOfItems)
+    const slicedArray = searchResultesArray.slice(numOfItems - 8, numOfItems)
 
     return (
-        <Grid container display="flex" direction="column" spacing={3}>
+        <Grid container display="flex" direction="column" spacing={3} justifyContent="space-around">
             <Grid item xs={4}>
                 <Typography
                     variant="h2"
@@ -55,19 +55,25 @@ function SearchInFit({ errorMessage, searchLogic, activityValue, searchResult}) 
                     {errorMessage}
                 </Typography>}
                 <Grid container
-                    spacing={2}
+                    rowSpacing={2}
+                    columnSpacing={0.5}
+                    columns={16}
                     sx={{
                         display: "flex",
                         flexDirection: "row",
                         alignItems: "center",
                         justifyContent: "center",
-                        flexWrap: "wrap"
+                        flexWrap: "wrap",
                     }}
                 >
                     {!errorMessage && slicedArray}
                 </Grid>
             </Grid>
-            <Grid item>
+            <Grid item
+                sx={{
+                    display: "flex",
+                    justifyContent: "center"
+                }}>
                 {!errorMessage && <PaginationFooter
                     searchResultesArray={searchResultesArray}
                     setNumOfItems={setNumOfItems}

@@ -1,8 +1,8 @@
 import { useState } from "react";
-import citiesData from "../utiles/placesData";
-import activitiesData from "../utiles/activitiesData";
+import citiesData from "../data/placesData";
+import activitiesData from "../data/activitiesData";
 import SearchInFit from './SearchInFit';
-import requestToFitServer from '../functionsRelatedToSearch/freeFitService'
+import requestToFitServer from '../services/freeFitService'
 
 function MainSearchComponent() {
 
@@ -16,7 +16,6 @@ function MainSearchComponent() {
         let arrActivity = "";
 
         if (arrFromAutocompleteInput.length <= 2 && arrFromAutocompleteInput.length > 0) {
-
             for (let autoInputIndex = 0; autoInputIndex < arrFromAutocompleteInput.length; autoInputIndex++) {
 
                 for (let cityIndex = 0; cityIndex < citiesData.length; cityIndex++) {
@@ -50,14 +49,12 @@ function MainSearchComponent() {
     }
 
     return (
-        <div>
-            <SearchInFit
-                errorMessage={errorMessage}
-                searchLogic={searchLogic}
-                searchResult={searchResult}
-                activityValue={activityValue}
-            />
-        </div >
+        <SearchInFit
+            errorMessage={errorMessage}
+            searchLogic={searchLogic}
+            searchResult={searchResult}
+            activityValue={activityValue}
+        />
     )
 }
 

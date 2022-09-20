@@ -2,7 +2,7 @@ import axios from "axios";
 
 async function requestToFitServer(city, activity) {
     try {
-        const response = await axios.post('http://localhost:5000', {
+        const response = await axios.post('http://localhost:5000/freefit-search', {
             CompanyID: 0,
             area: city ? city : -1,
             freeText: "",
