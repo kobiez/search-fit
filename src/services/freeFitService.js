@@ -3,7 +3,7 @@ import axios from "axios";
 class FreefitData {
     static async searchForFreefitData(city, activity) {
         try {
-            await axios.post('http://localhost:5000/freefit-search', {
+            await axios.post('/freefit-search', {
                 CompanyID: 0,
                 area: city ? city : -1,
                 freeText: "",
@@ -16,7 +16,7 @@ class FreefitData {
 
     static async dataFromFreefit() {
         try {
-            const response = await axios.get('http://localhost:5000/freefit-search');
+            const response = await axios.get('/freefit-search');
             return response.data;
         } catch (error) {
             console.error("Error: ", error.message)
