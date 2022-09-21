@@ -7,8 +7,8 @@ const publicPath = path.join(__dirname, '../../../build')
 
 const router = express.Router();
 
-router.post('/freefit-search', FreefitController.validateSearch, FreefitController.searchInFreeFit)
-router.get('/freefit-search', FreefitController.freeFitDataArray)
+router.post('/search', FreefitController.validateSearch, FreefitController.searchInFreeFit)
+router.get('/search', FreefitController.freeFitDataArray)
 
 router.get("*", (req, res) => {
     res.sendFile(path.join(publicPath, "index.html"));
