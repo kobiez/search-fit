@@ -53,11 +53,10 @@ function SearchSection({ searchLogic, setNumOfItems, setPage }) {
                     options={[...arrayForAutocompleteOptions]}
                     getOptionLabel={value => `${value}`}
                     renderInput={(params) =>
-                        <TextField {...params}
+                        <TextField {...params} 
                             InputProps={{
                                 ...params.InputProps
                             }}
-                            placeholder='"יוגה" "תל-אביב"'
                         />
                     }
                     value={autocompleteInputValue}
