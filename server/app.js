@@ -9,6 +9,6 @@ app.use(express.static(publicPath));
 app.use(cors())
 app.use(express.json())
 
-app.use('/', require('./api/v1/router'))
+app.use('/search', require('./api/v1/router'))
 
 module.exports = app;
