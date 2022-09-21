@@ -57,7 +57,6 @@ function SearchSection({ searchLogic, setNumOfItems, setPage }) {
                             InputProps={{
                                 ...params.InputProps
                             }}
-                            
                         />
                     }
                     value={autocompleteInputValue}
