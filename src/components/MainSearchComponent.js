@@ -41,8 +41,9 @@ function MainSearchComponent() {
             return console.error('Search error');
         }
 
-        const response = await FreefitData.searchForFreefitData(arrCity, arrActivity)
-        console.log("cliente response: ", response.Message);
+
+        await FreefitData.searchForFreefitData(arrCity, arrActivity)
+
         const freefitDataArray = await FreefitData.dataFromFreefit();
 
         if (freefitDataArray.length === 0) {
