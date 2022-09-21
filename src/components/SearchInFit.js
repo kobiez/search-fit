@@ -17,13 +17,13 @@ function SearchInFit({ errorMessage, searchLogic, activityValue, searchResult })
 
     return (
         <Grid container display="flex" direction="column" spacing={3} justifyContent="space-around">
-            <Grid item xs={4}>
+            <Grid item xs={1}>
                 <Typography
                     variant="h1"
                     mb={1}
                     color="error.light"
                     textAlign="center"
-                    sx={{ fontFamily: "'Permanent Marker'", fontSize: "7.5rem", textShadow: "" }}
+                    sx={{ fontFamily: "'Permanent Marker'", fontSize: "7.5rem" }}
                 >
                     Search in fit
                 </Typography>
