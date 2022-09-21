@@ -3,6 +3,7 @@ import axios from "axios";
 class FreefitData {
     static async searchForFreefitData(city, activity) {
         try {
+
             await axios.post('/freefit/search', {
                 CompanyID: 0,
                 area: city ? city : -1,
