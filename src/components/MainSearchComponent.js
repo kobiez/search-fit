@@ -33,7 +33,7 @@ function MainSearchComponent() {
                 }
             }
         } else if (arrFromAutocompleteInput.length === 0) {
-            setErrorMessage('You must choose atlist 1 paramater')
+            setErrorMessage('צריך לבחור')
             return console.error('Search error')
         }
         else {
