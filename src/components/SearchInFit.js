@@ -4,7 +4,23 @@ import SearchSection from './SearchSection';
 import PaginationFooter from "./Pagination";
 import mapThroughSearchValueArr from './SlicedResults'
 import { useState } from "react";
-import { Link } from "@mui/material";
+import Link from "@mui/material/Link";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme();
+
+theme.typography.h1 = {
+    fontSize: '5rem',
+    [theme.breakpoints.up('md')]: {
+        fontSize: '7.5rem',
+    },
+    [theme.breakpoints.down('md')]: {
+        fontSize: '5rem',
+    },
+    [theme.breakpoints.down('sm')]: {
+        fontSize: '3rem',
+    },
+};
 
 function SearchInFit({ errorMessage, searchLogic, activityValue, searchResult }) {
 
@@ -18,15 +34,17 @@ function SearchInFit({ errorMessage, searchLogic, activityValue, searchResult })
     return (
         <Grid container display="flex" direction="column" spacing={3} justifyContent="space-around">
             <Grid item xs={1}>
-                <Typography
-                    variant="h1"
-                    mb={1}
-                    color="error.light"
-                    textAlign="center"
-                    sx={{ fontFamily: "'Permanent Marker'", fontSize: "7.5rem" }}
-                >
-                    Search in fit
-                </Typography>
+                <ThemeProvider theme={theme}>
+                    <Typography
+                        variant="h1"
+                        mb={1}
+                        color="error.light"
+                        textAlign="center"
+                        sx={{ fontFamily: "'Permanent Marker'", fontSize: "7.5rem" }}
+                    >
+                        Search in fit
+                    </Typography>
+                </ThemeProvider>
             </Grid>
             <Grid item xs={4}>
                 <Typography
