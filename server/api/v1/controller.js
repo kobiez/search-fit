@@ -17,7 +17,7 @@ class FreefitController {
         } catch (error) {
             console.error(error)
             res.status(status.INTERNAL_SERVER_ERROR)
-                .send({ error/* : "Internal server error" */ })
+                .send({ error: "Internal server error" })
         }
     }
 
