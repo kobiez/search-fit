@@ -45,7 +45,7 @@ function SearchSection({ searchLogic, setNumOfItems, setPage }) {
                     forcePopupIcon={false}
                     multiple
                     clearOnEscape
-                    noOptionsText="Type to search..."
+                    noOptionsText="חפשו עיר, סוג פעילות או גם וגם"
                     sx={{ width: "45%", minWidth: "250px" }}
                     closeText={"Close"}
                     clearText={"Bye Bye"}
@@ -57,6 +57,7 @@ function SearchSection({ searchLogic, setNumOfItems, setPage }) {
                             InputProps={{
                                 ...params.InputProps
                             }}
+                            placeholder='"יוגה" "תל-אביב"'
                         />
                     }
                     value={autocompleteInputValue}
