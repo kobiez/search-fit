@@ -33,11 +33,11 @@ function MainSearchComponent() {
                 }
             }
         } else if (arrFromAutocompleteInput.length === 0) {
-            setErrorMessage('צריך לבחור')
+            setErrorMessage('צריך לבחור אפשרות חיפוש אחת לפחות')
             return console.error('Search error')
         }
         else {
-            setErrorMessage('You can search maximum 2 parameters, 1 city and 1 activity')
+            setErrorMessage('ניתן לחפש עד שתי אפשרויות בלבד בכל פעם, מקום אחד ופעילות אחת')
             return console.error('Search error');
         }
 
@@ -47,7 +47,7 @@ function MainSearchComponent() {
         const freefitDataArray = await FreefitData.dataFromFreefit();
 
         if (freefitDataArray.length === 0) {
-            setErrorMessage("Can't find any results that matching your search, try another search")
+            setErrorMessage("לא נמצאו תוצאות מתאימות")
         }
         setNumOfItems(8);
         setSearchResult(freefitDataArray)
