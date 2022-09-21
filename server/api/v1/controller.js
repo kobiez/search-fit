@@ -1,21 +1,29 @@
-const freefit = require('./freeFitService')
+const Freefit = require('./freeFitService')
 const status = require('http-status');
 require('dotenv').config()
 
-class freefitController {
+class FreefitController {
+    static freefitData;
+
     static async searchInFreeFit(req, res, next) {
+
         try {
-
             const { CompanyID, area, freeText, subcategoryId } = req.body;
-            const { data } = await freefit.freeFitService(CompanyID, area, freeText, subcategoryId)
+            const { data } = await Freefit.freeFitService(CompanyID, area, freeText, subcategoryId)
 
-            res.send(data.d)
+            FreefitController.freefitData = data;
+            res.send({ Message: "Searching...." })
+            
         } catch (error) {
-
             console.error(error)
             res.status(status.INTERNAL_SERVER_ERROR)
                 .send({ error: "Internal server error" })
         }
+    }
+
+    static freeFitDataArray(req, res, next) {
+        const data = FreefitController.freefitData;
+        res.send(data.d)
     }
 
     static validateSearch(req, res, next) {
@@ -28,4 +36,4 @@ class freefitController {
     }
 }
 
-module.exports = freefitController;
+module.exports = FreefitController;

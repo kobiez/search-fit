@@ -1,7 +1,7 @@
 const axios = require('axios').default
 require('dotenv').config()
 
-class freefit {
+class Freefit {
     static async freeFitService(CompanyID, area, freeText, subcategoryId) {
 
         const response = await axios.post(process.env.FREEFIT_SERVER, {
@@ -14,4 +14,4 @@ class freefit {
     }
 }
 
-module.exports = freefit;
+module.exports = Freefit;

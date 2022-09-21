@@ -2,7 +2,7 @@ import { useState } from "react";
 import citiesData from "../data/placesData";
 import activitiesData from "../data/activitiesData";
 import SearchInFit from './SearchInFit';
-import requestToFitServer from '../services/freeFitService'
+import FreefitData from '../services/freeFitService'
 
 function MainSearchComponent() {
 
@@ -12,7 +12,6 @@ function MainSearchComponent() {
 
     async function searchLogic(arrFromAutocompleteInput, setNumOfItems, setPage) {
         setErrorMessage("");
-        setNumOfItems(8);
         setPage(1)
         let arrCity = "";
         let arrActivity = "";
@@ -42,12 +41,14 @@ function MainSearchComponent() {
             return console.error('Search error');
         }
 
-        const data = await requestToFitServer(arrCity, arrActivity)
+        await FreefitData.searchForFreefitData(arrCity, arrActivity)
+        const freefitDataArray = await FreefitData.dataFromFreefit();
 
-        if (data.length === 0) {
+        if (freefitDataArray.length === 0) {
             setErrorMessage("Can't find any results that matching your search, try another search")
         }
-        setSearchResult(data)
+        setNumOfItems(8);
+        setSearchResult(freefitDataArray)
     }
 
     return (

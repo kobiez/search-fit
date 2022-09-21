@@ -1,17 +1,28 @@
 import axios from "axios";
 
-async function requestToFitServer(city, activity) {
-    try {
-        const response = await axios.post('http://localhost:5000/freefit-search', {
-            CompanyID: 0,
-            area: city ? city : -1,
-            freeText: "",
-            subcategoryId: activity ? activity : -1
-        })
-        return response.data;
-    } catch (error) {
-        console.error("Error: ", error.message)
+class FreefitData {
+    static async searchForFreefitData(city, activity) {
+        try {
+            await axios.post('http://localhost:5000/freefit-search', {
+                CompanyID: 0,
+                area: city ? city : -1,
+                freeText: "",
+                subcategoryId: activity ? activity : -1
+            })
+        } catch (error) {
+            console.error("Error: ", error.message)
+        }
+    }
+
+    static async dataFromFreefit() {
+        try {
+            const response = await axios.get('http://localhost:5000/freefit-search');
+            return response.data;
+        } catch (error) {
+            console.error("Error: ", error.message)
+        }
+
     }
 }
 
-export default requestToFitServer;
+export default FreefitData;

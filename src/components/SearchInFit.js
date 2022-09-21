@@ -89,7 +89,7 @@ function SearchInFit({ errorMessage, searchLogic, activityValue, searchResult })
             <Grid item
                 sx={{
                     display: "flex",
-                    justifyContent: "center",
+                    justifyContent: "center"
                 }}>
                 {!errorMessage && <PaginationFooter
                     searchResultesArray={searchResultesArray}

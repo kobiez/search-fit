@@ -1,8 +1,9 @@
 const express = require('express');
-const freefitController = require('./controller');
+const FreefitController = require('./controller');
 
 const router = express.Router();
 
-router.post('/freefit-search', freefitController.validateSearch, freefitController.searchInFreeFit)
+router.post('/freefit-search', FreefitController.validateSearch, FreefitController.searchInFreeFit)
+router.get('/freefit-search', FreefitController.freeFitDataArray)
 
 module.exports = router;
