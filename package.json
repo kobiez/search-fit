@@ -23,7 +23,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "start": "node ./server/index.js",
     "dev": "concurrently \"npm run dev-server\" \"npm run client\"",
     "server": "node ./server/index.js",
     "dev-server": "nodemon ./server/index.js",
