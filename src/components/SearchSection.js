@@ -4,6 +4,18 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import setAutocompleteOptionsOnChange from './autocompleteOptions'
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { red } from '@mui/material/colors';
+
+const theme = createTheme({
+    palette: {
+        error: {
+            main: red[400],
+            dark: red[700]
+        }
+        }
+    }
+)
 
 function SearchSection({ searchLogic, setNumOfItems, setPage }) {
 
@@ -27,20 +39,22 @@ function SearchSection({ searchLogic, setNumOfItems, setPage }) {
                     justifyContent: "center"
                 }}
             >
-                <Button
-                    type="button"
-                    variant="contained"
-                    color="error"
-                    onClick={() => searchLogic(autocompleteInputValue, setNumOfItems, setPage)}
-                    sx={{
-                        width: "10%",
-                        height: "55px",
-                        fontSize: " 1.3rem",
-                        marginRight: "5px"
-                    }}
-                >
-                    חפש
-                </Button>
+                <ThemeProvider theme={theme}>
+                    <Button
+                        type="button"
+                        variant="contained"
+                        color="error"
+                        onClick={() => searchLogic(autocompleteInputValue, setNumOfItems, setPage)}
+                        sx={{
+                            width: "10%",
+                            height: "55px",
+                            fontSize: " 1.3rem",
+                            marginRight: "5px"
+                        }}
+                    >
+                        חיפוש
+                    </Button>
+                </ThemeProvider>
                 <Autocomplete
                     forcePopupIcon={false}
                     multiple
@@ -53,7 +67,7 @@ function SearchSection({ searchLogic, setNumOfItems, setPage }) {
                     options={[...arrayForAutocompleteOptions]}
                     getOptionLabel={value => `${value}`}
                     renderInput={(params) =>
-                        <TextField {...params} 
+                        <TextField {...params}
                             InputProps={{
                                 ...params.InputProps
                             }}

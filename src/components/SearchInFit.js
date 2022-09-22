@@ -40,7 +40,7 @@ function SearchInFit({ errorMessage, searchLogic, activityValue, searchResult })
                         mb={1}
                         color="error.light"
                         textAlign="center"
-                        sx={{ fontFamily: "'Permanent Marker'", fontSize: "7.5rem" }}
+                        sx={{ fontFamily: "'Permanent Marker'", marginTop:"0", paddingTop:"0" }}
                     >
                         Search in fit
                     </Typography>
