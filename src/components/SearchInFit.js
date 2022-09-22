@@ -19,7 +19,7 @@ theme.typography.h1 = {
     },
     [theme.breakpoints.down('sm')]: {
         fontSize: '3rem',
-    },
+    }
 };
 
 function SearchInFit({ errorMessage, searchLogic, activityValue, searchResult }) {
@@ -40,7 +40,7 @@ function SearchInFit({ errorMessage, searchLogic, activityValue, searchResult })
                         mb={1}
                         color="error.light"
                         textAlign="center"
-                        sx={{ fontFamily: "'Permanent Marker'", fontSize: "7.5rem" }}
+                        sx={{ fontFamily: "'Permanent Marker'", marginTop: "0", paddingTop: "0" }}
                     >
                         Search in fit
                     </Typography>
@@ -53,13 +53,13 @@ function SearchInFit({ errorMessage, searchLogic, activityValue, searchResult })
                     color="error.light"
                     textAlign="center"
                 >
-                    <Link
+                    מנוע חיפוש לאתר   <Link
                         href="https://freefit.co.il"
                         underline="none"
                         target="_blank"
                         rel="noopener"
                         color="error.light"
-                    >Freefit</Link> מנוע חיפוש לאתר
+                    >Freefit  {" "}</Link>
                 </Typography>
             </Grid>
             <SearchSection
@@ -78,32 +78,33 @@ function SearchInFit({ errorMessage, searchLogic, activityValue, searchResult })
                     {errorMessage}
                 </Typography>}
             </Grid>
-            <Grid item
-                sx={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    justifyContent: "space-around",
-                    alignItems: "center",
-                    marginTop: "3.5rem"
-                }}
-            >
-                {!errorMessage && <Grid container maxWidth="lg"
-                    rowSpacing={1}
-                    columnSpacing={1}
-                    columns={16}
+                <Grid item
                     sx={{
                         display: "flex",
-                        flexDirection: "row",
-                        alignItems: "center",
-                        justifyContent: "center",
                         flexWrap: "wrap",
-                        minHeight: "40rem",
-                        marginBottom: "6rem"
+                        justifyContent: "space-around",
+                        alignItems: "center",
+                        marginTop: "3.5rem"
                     }}
                 >
-                    {slicedArray}
-                </Grid>}
-            </Grid>
+                    {!errorMessage && <Grid container maxWidth="lg"
+                        dir="ltr"
+                        rowSpacing={1}
+                        columnSpacing={1}
+                        columns={16}
+                        sx={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            flexWrap: "wrap",
+                            minHeight: "40rem",
+                            marginBottom: "3rem"
+                        }}
+                    >
+                        {slicedArray}
+                    </Grid>}
+                </Grid>
             <Grid item
                 sx={{
                     display: "flex",

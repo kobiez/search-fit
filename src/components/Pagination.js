@@ -17,6 +17,7 @@ function PaginationFooter({ searchResultesArray, setNumOfItems, page, setPage })
     return (
         <Box component={"div"}>
             {count > 0 && <Pagination
+                dir="ltr"
                 showFirstButton
                 showLastButton
                 variant="outlined"
