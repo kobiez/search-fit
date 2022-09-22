@@ -17,7 +17,7 @@ For the desigen I used **Material UI** library.
 
 ### Start
 
-- To start the up `npm start`
+- To start the app `npm start`
 
 - The app will run on localhost:5000
 
