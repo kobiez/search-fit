@@ -83,6 +83,7 @@ function SearchSection({ searchLogic, setNumOfItems, setPage }) {
                             />
 
                             <Button
+                                data-testid="search-button"
                                 type="button"
                                 variant="contained"
                                 color="error"
