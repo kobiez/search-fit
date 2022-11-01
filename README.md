@@ -6,10 +6,6 @@
 
 The app deployed to heroku, try it [here](https://search-in-fit.herokuapp.com/) .
 
-### Website
-
-The app deployed to heroku, try it [here](https://search-in-fit.herokuapp.com/) .
-
 ### Technologies
 
 To create this app I used **Node.js** for the server and **React.js** for the client.
